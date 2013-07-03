@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import static org.junit.Assert.assertEquals;
+import static org.jboss.arquillian.graphene.Graphene.guardHttp;
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Arquillian.class)
@@ -23,12 +23,11 @@ public class GrapheneTest {
         //when
         driver.get("https://itcrowd.pl/vop/");
         WebElement loginButton = driver.findElement(By.id("j_idt13:login")); //j_idt13:login is id of login href
-        loginButton.click();
-        //String pageURL = driver.getCurrentUrl();
-        WebElement loginForm = driver.findElement(By.id("lF:e:label")); //lF:e:label is id of label in login form on login page
+        guardHttp(loginButton).click();
+        String pageURL = driver.getCurrentUrl();
+        boolean IsItLoginPage = pageURL.startsWith("https://itcrowd.pl/vop/login");
 
         //then
-        //assertEquals("https://itcrowd.pl/vop/login/", pageURL);
-        assertTrue(loginForm.isDisplayed());
+        assertTrue(IsItLoginPage);
     }
 }
