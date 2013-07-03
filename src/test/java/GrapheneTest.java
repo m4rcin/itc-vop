@@ -22,12 +22,11 @@ public class GrapheneTest {
 
         //when
         driver.get("https://itcrowd.pl/vop/");
-        WebElement loginButton = driver.findElement(By.id("j_idt13:login")); //j_idt13:login is id of login href
+        WebElement loginButton = driver.findElement(By.id("j_idt13:login"));
         guardHttp(loginButton).click();
         String pageURL = driver.getCurrentUrl();
-        boolean IsItLoginPage = pageURL.startsWith("https://itcrowd.pl/vop/login");
 
         //then
-        assertTrue(IsItLoginPage);
+        assertTrue(pageURL.startsWith("https://itcrowd.pl/vop/login"));
     }
 }
